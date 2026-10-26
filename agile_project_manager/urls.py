@@ -15,8 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from agile_project_manager.views import DashboardView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', DashboardView.as_view(), name='dashboard'),
+    path('projects/', include('projects.urls')),
+    path('sprints/', include('sprints.urls')),
+    path('tasks/', include('tasks.urls')),
+
 ]
