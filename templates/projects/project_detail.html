@@ -1,8 +1,112 @@
 {% extends "base.html" %}
-{% block title %}{{ project.name }} | SprintFlow{% endblock %}
+{% block title %}
+    {{ project.name }}
+    | SprintFlow
+{% endblock %}
 {% block content %}
-<nav aria-label="breadcrumb" class="mb-3"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="{% url 'project_list' %}">Projects</a></li><li class="breadcrumb-item active">{{ project.name }}</li></ol></nav>
-<div class="page-header"><div><h1 class="h2 mb-2">{{ project.name|title }}</h1><span class="badge rounded-pill badge-status-{{ project.status }}">{{ project.get_status_display|default:project.status|title }}</span></div><div class="d-flex gap-2"><a class="btn btn-outline-secondary" href="{% url 'project_update' project.pk %}">Edit</a><a class="btn btn-outline-danger" href="{% url 'project_delete' project.pk %}">Delete</a></div></div>
-<div class="row g-4 mb-4"><div class="col-lg-8"><div class="card h-100"><div class="card-body"><h2 class="h5">About this project</h2><p class="text-muted mb-0">{{ project.description|default:"No description has been added yet."|linebreaksbr }}</p></div></div></div><div class="col-lg-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Timeline</h2><dl class="row mb-0"><dt class="col-5 text-muted">Starts</dt><dd class="col-7">{{ project.start_date|date:"M j, Y" }}</dd><dt class="col-5 text-muted">Ends</dt><dd class="col-7">{{ project.end_date|date:"M j, Y" }}</dd><dt class="col-5 text-muted">Created</dt><dd class="col-7">{{ project.created_at|date:"M j, Y" }}</dd></dl></div></div></div></div>
-<div class="card"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h5 mb-0">Sprints</h2><a class="btn btn-sm btn-primary" href="{% url 'sprint_create' %}?project={{ project.pk }}">+ Add Sprint</a></div><div class="list-group list-group-flush">{% for sprint in sprints %}<a href="{% url 'sprint_detail' sprint.pk %}" class="list-group-item list-group-item-action px-0 d-flex justify-content-between align-items-center"><div><span class="fw-semibold">{{ sprint.name }}</span><div class="small text-muted">{{ sprint.goal|truncatewords:12 }}</div></div><span class="badge rounded-pill badge-status-{{ sprint.status }}">{{ sprint.get_status_display|default:sprint.status|title }}</span></a>{% empty %}{% include "partials/_empty_state.html" with title="No sprints yet" message="Add a sprint to start planning this project." action_url=sprint_create_url action_text="Add sprint" %}{% endfor %}</div></div></div>
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'projects:list' %}">
+                    Projects
+                </a>
+            </li>
+            <li class="breadcrumb-item active">
+                {{ project.name }}
+            </li>
+        </ol>
+    </nav>
+    <div class="page-header">
+        <div>
+            <h1 class="h2 mb-2">
+                {{ project.name|title }}
+            </h1>
+            <span class="badge rounded-pill badge-status-{{ project.status }}">
+                {{ project.get_status_display|default:project.status|title }}
+            </span>
+        </div>
+        <div class="d-flex gap-2">
+            <a class="btn btn-outline-secondary" href="{% url 'projects:update' project.pk %}">
+                Edit
+            </a>
+            <a class="btn btn-outline-danger" href="{% url 'projects:delete' project.pk %}">
+                Delete
+            </a>
+        </div>
+    </div>
+    <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="h5">
+                        About this project
+                    </h2>
+                    <p class="text-muted mb-0">
+                        {{ project.description|default:"No description has been added yet."|linebreaksbr }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="h5">
+                        Timeline
+                    </h2>
+                    <dl class="row mb-0">
+                        <dt class="col-5 text-muted">
+                            Starts
+                        </dt>
+                        <dd class="col-7">
+                            {{ project.start_date|date:"M j, Y" }}
+                        </dd>
+                        <dt class="col-5 text-muted">
+                            Ends
+                        </dt>
+                        <dd class="col-7">
+                            {{ project.end_date|date:"M j, Y" }}
+                        </dd>
+                        <dt class="col-5 text-muted">
+                            Created
+                        </dt>
+                        <dd class="col-7">
+                            {{ project.created_at|date:"M j, Y" }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h5 mb-0">
+                    Sprints
+                </h2>
+                <a class="btn btn-sm btn-primary" href="{#  #} url 'sprint_create' %}?project={{ project.pk }}">
+                    + Add Sprint
+                </a>
+            </div>
+            <div class="list-group list-group-flush">
+                {% for sprint in sprints %}
+                    <a href="{% url 'sprint_detail' sprint.pk %}" class="list-group-item list-group-item-action px-0 d-flex
+                                            justify-content-between align-items-center">
+                        <div>
+                            <span class="fw-semibold">
+                                {{ sprint.name }}
+                            </span>
+                            <div class="small text-muted">
+                                {{ sprint.goal|truncatewords:12 }}
+                            </div>
+                        </div>
+                        <span class="badge rounded-pill badge-status-{{ sprint.status }}">
+                            {{ sprint.get_status_display|default:sprint.status|title }}
+                        </span>
+                    </a>
+                {% empty %}
+                    {% include "partials/_empty_state.html" with title="No sprints yet" message="Add a sprint to start planning this project." action_url=sprint_create_url action_text="Add sprint" %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

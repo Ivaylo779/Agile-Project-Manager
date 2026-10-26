@@ -1,8 +1,115 @@
 {% extends "base.html" %}
-{% block title %}Projects | SprintFlow{% endblock %}
+{% block title %}
+    Projects | SprintFlow
+{% endblock %}
 {% block content %}
-<div class="page-header"><div><p class="text-primary fw-semibold mb-1">Workspace</p><h1 class="h2 mb-1">Projects</h1><p class="text-muted mb-0">Your projects and their current delivery status.</p></div><a class="btn btn-primary" href="{% url 'project_create' %}">+ New Project</a></div>
-<div class="card mb-4"><div class="card-body"><form method="get" class="row g-2 align-items-end"><div class="col-md-8"><label for="project-search" class="form-label">Search projects</label><input id="project-search" name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search by project name"></div><div class="col-md-3"><label for="project-status" class="form-label">Status</label><select id="project-status" name="status" class="form-select"><option value="">All statuses</option>{% for value,label in status_choices %}<option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></div><div class="col-md-1"><button class="btn btn-outline-primary w-100" type="submit">Go</button></div></form></div></div>
-<div class="card table-card"><div class="table-responsive"><table class="table table-hover mb-0"><thead><tr><th>Project</th><th>Status</th><th>Timeline</th><th class="text-end">Actions</th></tr></thead><tbody>{% for project in projects %}{% with status_label=project.get_status_display|default:project.status %}<tr><td><a class="fw-semibold text-decoration-none" href="{% url 'project_detail' project.pk %}">{{ project.name|title }}</a><div class="small text-muted">{{ project.description|truncatewords:12 }}</div></td><td><span class="badge rounded-pill badge-status-{{ project.status }}">{{ status_label|title }}</span></td><td class="small">{{ project.start_date|date:"M j, Y" }} – {{ project.end_date|date:"M j, Y" }}</td><td class="text-end"><a href="{% url 'project_update' project.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a></td></tr>{% endwith %}{% empty %}<tr><td colspan="4">{% include "partials/_empty_state.html" with title="No projects found" message="Try a different search or create your first project." action_url=project_create_url action_text="Create project" %}</td></tr>{% endfor %}</tbody></table></div></div>
-{% include "partials/_pagination.html" %}
+    <div class="page-header">
+        <div>
+            <p class="text-primary fw-semibold mb-1">
+                Workspace
+            </p>
+            <h1 class="h2 mb-1">
+                Projects
+            </h1>
+            <p class="text-muted mb-0">
+                Your projects and their current delivery status.
+            </p>
+        </div>
+        <a class="btn btn-primary" href="{% url 'projects:create' %}">
+            + New Project
+        </a>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-2 align-items-end">
+                <div class="col-md-8">
+                    <label for="project-search" class="form-label">
+                        Search projects
+                    </label>
+                    <input id="project-search" name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search
+                                            by project name">
+                </div>
+                <div class="col-md-3">
+                    <label for="project-status" class="form-label">
+                        Status
+                    </label>
+                    <select id="project-status" name="status" class="form-select">
+                        <option value="">
+                            All statuses
+                        </option>
+                        {% for value,label in status_choices %}
+                            <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-outline-primary w-100" type="submit">
+                        Go
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card table-card">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>
+                            Project
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Timeline
+                        </th>
+                        <th class="text-end">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                        {% with status_label=project.get_status_display|default:project.status %}
+                            <tr>
+                                <td>
+                                    <a class="fw-semibold text-decoration-none" href="{% url 'projects:detail' project.pk %}">
+                                        {{ project.name|title }}
+                                    </a>
+                                    <div class="small text-muted">
+                                        {{ project.description|truncatewords:12 }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge rounded-pill badge-status-{{ project.status }}">
+                                        {{ status_label|title }}
+                                    </span>
+                                </td>
+                                <td class="small">
+                                    {{ project.start_date|date:"M j, Y" }}
+                                    –
+                                    {{ project.end_date|date:"M j, Y" }}
+                                </td>
+                                <td class="text-end">
+                                    <a href="{% url 'projects:update' project.pk %}" class="btn btn-sm btn-outline-secondary">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endwith %}
+                    {% empty %}
+                        <tr>
+                            <td colspan="4">
+                                {% include "partials/_empty_state.html" with title="No projects found" message="Try a different search or create your first project." action_url=project_create_url action_text="Create project" %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% include "partials/_pagination.html" %}
 {% endblock %}

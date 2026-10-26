@@ -1,23 +1,31 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="SprintFlow project and sprint management">
-    <title>{% block title %}SprintFlow{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block extra_css %}{% endblock %}
-</head>
-<body>
-    {% include "partials/_navbar.html" %}
-    <main class="container py-4">
-        {% include "partials/_messages.html" %}
-        {% block content %}{% endblock %}
-    </main>
-    {% include "partials/_footer.html" %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    {% block extra_js %}{% endblock %}
-</body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="SprintFlow project and sprint management">
+        <title>
+            {% block title %}
+                SprintFlow
+            {% endblock %}
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        {% block extra_css %}
+        {% endblock %}
+    </head>
+    <body>
+        {% include "partials/_navbar.html" %}
+        <main class="container py-4">
+            {% include "partials/_messages.html" %}
+            {% block content %}
+            {% endblock %}
+        </main>
+        {% include "partials/_footer.html" %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+        </script>
+        {% block extra_js %}
+        {% endblock %}
+    </body>
 </html>
