@@ -1,0 +1,37 @@
+:root {
+    --navy: #101b3d;
+    --navy-light: #1b2b58;
+    --blue: #2563eb;
+    --page-bg: #f5f7fb;
+    --ink: #172033;
+}
+
+body { background: var(--page-bg); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+.bg-navy { background: var(--navy); }
+.navbar-brand { letter-spacing: -.02em; }
+.brand-mark { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; margin-right: .4rem; border-radius: 8px; background: var(--blue); }
+.page-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.page-header h1 { font-weight: 700; letter-spacing: -.03em; }
+.card, .stat-card { border: 0; border-radius: 14px; box-shadow: 0 5px 20px rgba(16, 27, 61, .07); }
+.stat-card { background: #fff; padding: 1.25rem; height: 100%; }
+.stat-value { font-size: 1.8rem; font-weight: 700; }
+.stat-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 10px; background: #e8efff; color: var(--blue); font-weight: 700; }
+.table > :not(caption) > * > * { padding: 1rem .75rem; vertical-align: middle; }
+.table-card { overflow: hidden; }
+.badge-soft { background: #e8efff; color: #1d4ed8; }
+.badge-status-active, .badge-status-in_progress { background: #dbeafe; color: #1d4ed8; }
+.badge-status-completed, .badge-status-done { background: #dcfce7; color: #15803d; }
+.badge-status-planned, .badge-status-to_do { background: #f1f5f9; color: #475569; }
+.badge-status-on_hold { background: #fef3c7; color: #a16207; }
+.priority-high { color: #b91c1c; background: #fee2e2; }
+.priority-medium { color: #a16207; background: #fef3c7; }
+.priority-low { color: #15803d; background: #dcfce7; }
+.kanban-column { background: #eef2f7; border-radius: 14px; padding: 1rem; min-height: 280px; }
+.kanban-card { background: #fff; border-radius: 10px; padding: 1rem; margin-bottom: .75rem; box-shadow: 0 2px 8px rgba(16, 27, 61, .06); }
+.empty-state { background: #fff; border: 1px dashed #cbd5e1; border-radius: 14px; }
+.empty-state-icon { margin: auto; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: #e8efff; color: var(--blue); font-size: 1.5rem; }
+.form-control, .form-select { border-color: #d6dce8; border-radius: 9px; padding: .65rem .8rem; }
+.form-control:focus, .form-select:focus { border-color: var(--blue); box-shadow: 0 0 0 .2rem rgba(37, 99, 235, .15); }
+.color-swatch { display: inline-block; width: 1.25rem; height: 1.25rem; border-radius: 50%; vertical-align: middle; border: 1px solid rgba(0,0,0,.1); }
+@media (max-width: 575.98px) { .page-header { flex-direction: column; } .page-header .btn { width: 100%; } }

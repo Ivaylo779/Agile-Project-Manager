@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Task board | SprintFlow{% endblock %}
+{% block content %}
+<div class="page-header"><div><p class="text-primary fw-semibold mb-1">Execution board</p><h1 class="h2 mb-1">Task board</h1><p class="text-muted mb-0">A quick view of work by status.</p></div><a class="btn btn-primary" href="{% url 'task_create' %}">+ New Task</a></div>
+<div class="row g-3">
+    {% for column in kanban_columns %}
+    <div class="col-lg-4"><section class="kanban-column"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h6 text-uppercase mb-0">{{ column.title }}</h2><span class="badge bg-white text-dark">{{ column.tasks|length }}</span></div>{% for task in column.tasks %}<article class="kanban-card"><a class="fw-semibold text-decoration-none d-block mb-2" href="{% url 'task_detail' task.pk %}">{{ task.title }}</a><div class="d-flex justify-content-between align-items-center"><span class="badge rounded-pill priority-{{ task.priority|lower }}">{{ task.get_priority_display|default:task.priority|title }}</span>{% for label in task.labels.all %}<span class="badge rounded-pill badge-soft">{{ label.name }}</span>{% endfor %}</div></article>{% empty %}<p class="text-muted small mb-0">No tasks in this column.</p>{% endfor %}</section></div>
+    {% empty %}<div class="col-12">{% include "partials/_empty_state.html" with title="Your board is empty" message="Create tasks to start tracking progress." action_url=task_create_url action_text="Create task" %}</div>{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | SprintFlow{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div><p class="text-primary fw-semibold mb-1">Workspace overview</p><h1 class="h2 mb-2">Welcome to SprintFlow</h1><p class="text-muted mb-0">Plan projects, organize sprints, and keep every task moving forward.</p></div>
+    <a class="btn btn-primary" href="{% url 'project_create' %}">+ New Project</a>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="stat-card d-flex justify-content-between align-items-center"><div><div class="text-muted small">Total projects</div><div class="stat-value">{{ total_projects|default:"0" }}</div></div><div class="stat-icon">P</div></div></div>
+    <div class="col-md-4"><div class="stat-card d-flex justify-content-between align-items-center"><div><div class="text-muted small">Active sprints</div><div class="stat-value">{{ active_sprints|default:"0" }}</div></div><div class="stat-icon">S</div></div></div>
+    <div class="col-md-4"><div class="stat-card d-flex justify-content-between align-items-center"><div><div class="text-muted small">Open tasks</div><div class="stat-value">{{ open_tasks|default:"0" }}</div></div><div class="stat-icon">T</div></div></div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-7"><div class="card h-100"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h5 mb-0">Recently created projects</h2><a href="{% url 'project_list' %}" class="small">View all</a></div>
+        {% for project in recent_projects %}<div class="d-flex justify-content-between align-items-center py-3 border-bottom"><div><a class="fw-semibold text-decoration-none" href="{% url 'project_detail' project.pk %}">{{ project.name|title }}</a><div class="text-muted small">{{ project.description|truncatewords:12 }}</div></div><span class="badge rounded-pill badge-status-{{ project.status }}">{{ project.get_status_display|default:project.status|title }}</span></div>{% empty %}{% include "partials/_empty_state.html" with title="No projects yet" message="Create a project to see it here." action_url=project_create_url action_text="Create project" %}{% endfor %}
+    </div></div></div>
+    <div class="col-lg-5"><div class="card h-100"><div class="card-body"><div class="d-flex justify-content-between align-items-center mb-3"><h2 class="h5 mb-0">Recent tasks</h2><a href="{% url 'task_list' %}" class="small">View all</a></div>
+        {% for task in recent_tasks %}<div class="py-3 border-bottom"><a class="fw-semibold text-decoration-none" href="{% url 'task_detail' task.pk %}">{{ task.title }}</a><div class="d-flex justify-content-between mt-1"><span class="text-muted small">{{ task.sprint.name|default:"Unassigned sprint" }}</span><span class="badge rounded-pill priority-{{ task.priority|lower }}">{{ task.get_priority_display|default:task.priority|title }}</span></div></div>{% empty %}<p class="text-muted py-4 mb-0">No tasks have been created yet.</p>{% endfor %}
+    </div></div></div>
+</div>
+<div class="card mt-4"><div class="card-body"><h2 class="h5">Quick actions</h2><div class="d-flex flex-wrap gap-2"><a class="btn btn-outline-primary" href="{% url 'project_create' %}">Create project</a><a class="btn btn-outline-primary" href="{% url 'sprint_create' %}">Create sprint</a><a class="btn btn-outline-primary" href="{% url 'task_create' %}">Create task</a><a class="btn btn-outline-secondary" href="{% url 'label_create' %}">Create label</a></div></div></div>
+{% endblock %}
