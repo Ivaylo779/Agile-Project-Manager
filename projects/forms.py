@@ -9,8 +9,17 @@ class ProjectBaseForm(BaseForm):
     class Meta:
         model = Project
         exclude = ["created_at"]
+        labels = {
+            "name": "Project name",
+            "start_date": "Start date",
+            "end_date": "Planned end date",
+        }
+        help_texts = {
+            "name": "At least 2 characters, not only digits.",
+        }
         widgets = {
-            "description": forms.Textarea(attrs={"rows": 3}),
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter a name..."}),
+            "description": forms.Textarea(attrs={"rows": 3,}),
             "start_date": forms.DateInput(attrs={"type": "date"}),
             "end_date": forms.DateInput(attrs={"type": "date"}),
             "status": forms.Select(attrs={"class": "form-control"}),

@@ -9,7 +9,16 @@ class SprintBaseForm(BaseForm):
     class Meta:
         model = Sprint
         fields = '__all__'
+        labels = {
+            "name": "Sprint name",
+            "start_date": "Start date",
+            "end_date": "Planned end date",
+        }
+        help_texts = {
+            "name": "At least 4 characters, not only digits.",
+        }
         widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control", "placeholder": "Enter a name..."}),
             "goal": forms.Textarea(attrs={"rows": 3}),
             "start_date": forms.DateInput(attrs={"type": "date"}),
             "end_date": forms.DateInput(attrs={"type": "date"}),
@@ -49,4 +58,6 @@ class SprintCreateForm(SprintBaseForm):
 
 
 class SprintUpdateForm(SprintBaseForm):
-    ...
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["project"].disabled = True
