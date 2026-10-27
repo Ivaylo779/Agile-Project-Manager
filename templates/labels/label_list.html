@@ -1,13 +1,7 @@
 {% extends "base.html" %}
-{% block title %}
-    Labels | SprintFlow
-{% endblock %}
 {% block content %}
     <div class="page-header">
         <div>
-            <p class="text-primary fw-semibold mb-1">
-                Organization
-            </p>
             <h1 class="h2 mb-1">
                 Labels
             </h1>
@@ -15,7 +9,7 @@
                 Use labels to group and find related work quickly.
             </p>
         </div>
-        <a class="btn btn-primary" href="{% url 'label_create' %}">
+        <a class="btn btn-primary" href="{% url 'tasks:label_create' %}">
             + New Label
         </a>
     </div>
@@ -52,10 +46,10 @@
                                 </code>
                             </td>
                             <td>
-                                {{ label.tasks.count|default:"0" }}
+                                {{ label.task_set.count|default:"0" }}
                             </td>
                             <td class="text-end">
-                                <a href="{% url 'label_delete' label.pk %}" class="btn btn-sm btn-outline-danger">
+                                <a href="{% url 'tasks:label_delete' label.pk %}" class="btn btn-sm btn-outline-danger">
                                     Delete
                                 </a>
                             </td>

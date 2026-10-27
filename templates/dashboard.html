@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% block title %}
-    Dashboard | SprintFlow
-{% endblock %}
 {% block content %}
     <div class="page-header">
         <div>
@@ -15,23 +12,25 @@
                 Plan projects, organize sprints, and keep track of your tasks.
             </p>
         </div>
-        <a class="btn btn-primary" href="{% url 'projects:create' %}">
-            + New Project
-        </a>
+        <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-outline-primary" href="{% url 'projects:list' %}">
+                View Projects
+            </a>
+            <a class="btn btn-primary" href="{% url 'projects:create' %}">
+                + New Project
+            </a>
+        </div>
     </div>
     <div class="row g-3 mb-4">
         <div class="col-md-4">
             <div class="stat-card d-flex justify-content-between align-items-center">
                 <div>
                     <div class="text-muted small">
-                        Total projects
+                        Total projects:
                     </div>
                     <div class="stat-value">
-                        {{ total_projects|default:"0" }}
+                        {{ total_projects }}
                     </div>
-                </div>
-                <div class="stat-icon">
-                    P
                 </div>
             </div>
         </div>
@@ -39,14 +38,11 @@
             <div class="stat-card d-flex justify-content-between align-items-center">
                 <div>
                     <div class="text-muted small">
-                        Active sprints
+                        Active sprints:
                     </div>
                     <div class="stat-value">
-                        {{ active_sprints|default:"0" }}
+                        {{ active_sprints }}
                     </div>
-                </div>
-                <div class="stat-icon">
-                    S
                 </div>
             </div>
         </div>
@@ -54,14 +50,11 @@
             <div class="stat-card d-flex justify-content-between align-items-center">
                 <div>
                     <div class="text-muted small">
-                        Open tasks
+                        Open tasks:
                     </div>
                     <div class="stat-value">
-                        {{ open_tasks|default:"0" }}
+                        {{ open_tasks }}
                     </div>
-                </div>
-                <div class="stat-icon">
-                    T
                 </div>
             </div>
         </div>
@@ -81,7 +74,7 @@
                     {% for project in recent_projects %}
                         <div class="d-flex justify-content-between align-items-center py-3 border-bottom">
                             <div>
-                                <a class="fw-semibold text-decoration-none" href="{% url 'project_detail' project.pk %}">
+                                <a class="fw-semibold text-decoration-none" href="{% url 'projects:detail' project.pk %}">
                                     {{ project.name|title }}
                                 </a>
                                 <div class="text-muted small">
@@ -147,7 +140,7 @@
                 <a class="btn btn-outline-primary" href="{% url 'tasks:create' %}">
                     Create task
                 </a>
-                <a class="btn btn-outline-secondary" href="{#  #}">
+                <a class="btn btn-outline-primary" href="{% url 'tasks:label_create' %}">
                     Create label
                 </a>
             </div>

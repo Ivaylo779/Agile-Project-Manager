@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% block title %}
-    Tasks | SprintFlow
-{% endblock %}
 {% block content %}
     <div class="page-header">
         <div>
@@ -18,83 +15,6 @@
         <a class="btn btn-primary" href="{% url 'tasks:create' %}">
             + New Task
         </a>
-    </div>
-    <div class="card mb-4">
-        <div class="card-body">
-            <form method="get" class="row g-2 align-items-end">
-                <div class="col-lg-3">
-                    <label class="form-label">
-                        Search
-                    </label>
-                    <input class="form-control" name="q" value="{{ request.GET.q }}" placeholder="Search tasks">
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label">
-                        Status
-                    </label>
-                    <select class="form-select" name="status">
-                        <option value="">
-                            All statuses
-                        </option>
-                        {% for value,label in status_choices %}
-                            <option value="{{ value }}">
-                                {{ label }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label">
-                        Priority
-                    </label>
-                    <select class="form-select" name="priority">
-                        <option value="">
-                            All priorities
-                        </option>
-                        {% for value,label in priority_choices %}
-                            <option value="{{ value }}">
-                                {{ label }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label">
-                        Sprint
-                    </label>
-                    <select class="form-select" name="sprint">
-                        <option value="">
-                            All sprints
-                        </option>
-                        {% for sprint in sprints %}
-                            <option value="{{ sprint.pk }}">
-                                {{ sprint.name }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-2">
-                    <label class="form-label">
-                        Label
-                    </label>
-                    <select class="form-select" name="label">
-                        <option value="">
-                            All labels
-                        </option>
-                        {% for label in labels %}
-                            <option value="{{ label.pk }}">
-                                {{ label.name }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-lg-1">
-                    <button class="btn btn-outline-primary w-100" type="submit">
-                        Go
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
     <div class="card table-card">
         <div class="table-responsive">

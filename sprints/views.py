@@ -23,6 +23,12 @@ class SprintDetailView(DetailView):
     context_object_name = 'sprint'
     template_name = 'sprints/sprint_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = self.object.task_set.all()
+        return context
+
+
 class SprintUpdateView(UpdateView):
     model = Sprint
     fields = '__all__'
@@ -31,8 +37,7 @@ class SprintUpdateView(UpdateView):
 
 class SprintDeleteView(DeleteView):
     model = Sprint
-    success_url = reverse_lazy("sprints:list")
-
+    success_url = reverse_lazy("projects:list")
 
 
 

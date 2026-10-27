@@ -1,13 +1,9 @@
 {% extends "base.html" %}
-{% block title %}
-    {{ task.title }}
-    | SprintFlow
-{% endblock %}
 {% block content %}
     <nav aria-label="breadcrumb" class="mb-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'task_list' %}">
+                <a href="{% url 'tasks:list' %}">
                     Tasks
                 </a>
             </li>
@@ -30,10 +26,10 @@
             </span>
         </div>
         <div class="d-flex gap-2">
-            <a class="btn btn-outline-secondary" href="{% url 'task_update' task.pk %}">
+            <a class="btn btn-outline-secondary" href="{% url 'tasks:update' task.pk %}">
                 Edit
             </a>
-            <a class="btn btn-outline-danger" href="{% url 'task_delete' task.pk %}">
+            <a class="btn btn-outline-danger" href="{% url 'tasks:delete' task.pk %}">
                 Delete
             </a>
         </div>
@@ -74,7 +70,7 @@
                             Sprint
                         </dt>
                         <dd class="col-7">
-                            <a href="{% url 'sprint_detail' task.sprint.pk %}">
+                            <a href="{% url 'sprints:detail' task.sprint.pk %}">
                                 {{ task.sprint.name }}
                             </a>
                         </dd>

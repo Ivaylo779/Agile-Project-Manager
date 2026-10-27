@@ -1,13 +1,9 @@
 {% extends "base.html" %}
-{% block title %}
-    {{ sprint.name }}
-    | SprintFlow
-{% endblock %}
 {% block content %}
     <nav aria-label="breadcrumb" class="mb-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'sprint_list' %}">
+                <a href="{% url 'sprints:list' %}">
                     Sprints
                 </a>
             </li>
@@ -23,7 +19,7 @@
             </h1>
             <p class="mb-0">
                 Project:
-                <a href="{% url 'project_detail' sprint.project.pk %}">
+                <a href="{% url 'projects:detail' sprint.project.pk %}">
                     {{ sprint.project.name }}
                 </a>
                 <span class="badge rounded-pill badge-status-{{ sprint.status }} ms-2">
@@ -32,10 +28,10 @@
             </p>
         </div>
         <div class="d-flex gap-2">
-            <a class="btn btn-outline-secondary" href="{% url 'sprint_update' sprint.pk %}">
+            <a class="btn btn-outline-secondary" href="{% url 'sprints:update' sprint.pk %}">
                 Edit
             </a>
-            <a class="btn btn-outline-danger" href="{% url 'sprint_delete' sprint.pk %}">
+            <a class="btn btn-outline-danger" href="{% url 'sprints:delete' sprint.pk %}">
                 Delete
             </a>
         </div>
@@ -74,13 +70,13 @@
                 <h2 class="h5 mb-0">
                     Tasks
                 </h2>
-                <a class="btn btn-sm btn-primary" href="{% url 'task_create' %}?sprint={{ sprint.pk }}">
+                <a class="btn btn-sm btn-primary" href="{% url 'tasks:create' %}?sprint={{ sprint.pk }}">
                     + Add Task
                 </a>
             </div>
             <div class="list-group list-group-flush">
                 {% for task in tasks %}
-                    <a href="{% url 'task_detail' task.pk %}" class="list-group-item list-group-item-action px-0 d-flex
+                    <a href="{% url 'tasks:detail' task.pk %}" class="list-group-item list-group-item-action px-0 d-flex
                                             justify-content-between align-items-center">
                         <span>
                             <span class="fw-semibold">

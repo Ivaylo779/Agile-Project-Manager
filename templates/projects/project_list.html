@@ -1,7 +1,4 @@
 {% extends "base.html" %}
-{% block title %}
-    Projects | SprintFlow
-{% endblock %}
 {% block content %}
     <div class="page-header">
         <div>
@@ -18,39 +15,6 @@
         <a class="btn btn-primary" href="{% url 'projects:create' %}">
             + New Project
         </a>
-    </div>
-    <div class="card mb-4">
-        <div class="card-body">
-            <form method="get" class="row g-2 align-items-end">
-                <div class="col-md-8">
-                    <label for="project-search" class="form-label">
-                        Search projects
-                    </label>
-                    <input id="project-search" name="q" value="{{ request.GET.q }}" class="form-control" placeholder="Search
-                                            by project name">
-                </div>
-                <div class="col-md-3">
-                    <label for="project-status" class="form-label">
-                        Status
-                    </label>
-                    <select id="project-status" name="status" class="form-select">
-                        <option value="">
-                            All statuses
-                        </option>
-                        {% for value,label in status_choices %}
-                            <option value="{{ value }}" {% if request.GET.status == value %}selected{% endif %}>
-                                {{ label }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <button class="btn btn-outline-primary w-100" type="submit">
-                        Go
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
     <div class="card table-card">
         <div class="table-responsive">

@@ -24,6 +24,10 @@ main { flex: 1; }
 .badge-status-completed, .badge-status-done { background: #dcfce7; color: #15803d; }
 .badge-status-planned, .badge-status-to_do { background: #f1f5f9; color: #475569; }
 .badge-status-on_hold { background: #fef3c7; color: #a16207; }
+.sprint-status { display: inline-block; color: #172033; font-weight: 600; }
+.progress { min-width: 90px; height: 1rem; background: #e2e8f0; }
+.progress-bar { min-width: 2px; background: #2563eb; }
+.progress-value { min-width: 2.5rem; color: #172033; font-size: .875rem; font-weight: 600; }
 .priority-high { color: #b91c1c; background: #fee2e2; }
 .priority-medium { color: #a16207; background: #fef3c7; }
 .priority-low { color: #15803d; background: #dcfce7; }

@@ -1,8 +1,4 @@
 {% extends "base.html" %}
-{% block title %}
-    {{ project.name }}
-    | SprintFlow
-{% endblock %}
 {% block content %}
     <nav aria-label="breadcrumb" class="mb-3">
         <ol class="breadcrumb">
@@ -83,13 +79,13 @@
                 <h2 class="h5 mb-0">
                     Sprints
                 </h2>
-                <a class="btn btn-sm btn-primary" href="{#  #} url 'sprint_create' %}?project={{ project.pk }}">
+                <a class="btn btn-sm btn-primary" href="{% url 'sprints:create' %}?project={{ project.pk }}">
                     + Add Sprint
                 </a>
             </div>
             <div class="list-group list-group-flush">
                 {% for sprint in sprints %}
-                    <a href="{% url 'sprint_detail' sprint.pk %}" class="list-group-item list-group-item-action px-0 d-flex
+                    <a href="{% url 'sprints:detail' sprint.pk %}" class="list-group-item list-group-item-action px-0 d-flex
                                             justify-content-between align-items-center">
                         <div>
                             <span class="fw-semibold">

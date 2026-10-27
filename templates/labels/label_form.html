@@ -1,12 +1,4 @@
 {% extends "base.html" %}
-{% block title %}
-    {% if label %}
-        Edit label
-    {% else %}
-        Create label
-    {% endif %}
-    | SprintFlow
-{% endblock %}
 {% block content %}
     <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -27,7 +19,7 @@
                         {% csrf_token %}
                         {% include "partials/_form_fields.html" %}
                         <div class="d-flex justify-content-end gap-2 mt-4">
-                            <a class="btn btn-outline-secondary" href="{% url 'label_list' %}">
+                            <a class="btn btn-outline-secondary" href="{% url 'tasks:label_list' %}">
                                 Cancel
                             </a>
                             <button class="btn btn-primary" type="submit">
