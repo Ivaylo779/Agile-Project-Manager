@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 from projects.models import Project
@@ -11,7 +12,10 @@ class Sprint(models.Model):
         COMPLETED = 'completed', 'Completed'
 
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    name = models.CharField(
+        max_length=100,
+        validators=[MinLengthValidator(4)],
+    )
     goal = models.CharField(max_length=100)
     start_date = models.DateField()
     end_date = models.DateField()

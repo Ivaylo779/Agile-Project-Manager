@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from projects.forms import ProjectCreateForm, ProjectUpdateForm
 from projects.models import Project
 from sprints.models import Sprint
 
@@ -30,12 +31,12 @@ class ProjectDetailView(DetailView):
 
 class ProjectCreateView(CreateView):
     model = Project
-    fields = ["name", "description" , "start_date", "end_date", "status"]
+    form_class = ProjectCreateForm
     success_url = reverse_lazy("dashboard")
 
 class ProjectUpdateView(UpdateView):
     model = Project
-    fields = ["name", "description" , "start_date", "end_date", "status"]
+    form_class = ProjectUpdateForm
     success_url = reverse_lazy("dashboard")
 
 class ProjectDeleteView(DeleteView):

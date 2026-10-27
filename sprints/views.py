@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
+from sprints.forms import SprintUpdateForm, SprintCreateForm
 from sprints.models import Sprint
 
 
@@ -14,7 +15,7 @@ class SprintListView(ListView):
 
 class SprintCreateView(CreateView):
     model = Sprint
-    fields = '__all__'
+    form_class = SprintCreateForm
     success_url = reverse_lazy("sprints:list")
 
 
@@ -31,7 +32,7 @@ class SprintDetailView(DetailView):
 
 class SprintUpdateView(UpdateView):
     model = Sprint
-    fields = '__all__'
+    form_class = SprintUpdateForm
     success_url = reverse_lazy("sprints:list")
 
 

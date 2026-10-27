@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from tasks.forms import TaskCreateForm, TaskUpdateForm, LabelForm
 from tasks.models import Task, Label
 
 
@@ -19,13 +20,13 @@ class TaskDetailView(DetailView):
 class TaskCreateView(CreateView):
     model = Task
     template_name = 'tasks/task_form.html'
-    fields = ["sprint", "title", "description", "priority", "status", "labels"]
+    form_class = TaskCreateForm
     success_url = reverse_lazy('tasks:list')
 
 class TaskUpdateView(UpdateView):
     model = Task
     template_name = 'tasks/task_form.html'
-    fields = ["sprint", "title", "description", "priority", "status", "labels"]
+    form_class = TaskUpdateForm
     success_url = reverse_lazy('tasks:list')
 
 class TaskDeleteView(DeleteView):
@@ -44,14 +45,14 @@ class LabelListView(ListView):
 class LabelCreateView(CreateView):
     model = Label
     template_name = 'labels/label_form.html'
-    fields = ['name', 'color']
+    form_class = LabelForm
     success_url = reverse_lazy('tasks:label_list')
 
 
 class LabelUpdateView(UpdateView):
     model = Label
     template_name = 'labels/label_form.html'
-    fields = ['name', 'color']
+    form_class = LabelForm
     success_url = reverse_lazy('tasks:label_list')
 
 

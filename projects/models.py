@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 # Create your models here
@@ -7,8 +8,11 @@ class Project(models.Model):
         COMPLETED = 'completed', 'Completed'
         ON_HOLD = 'on_hold', 'On Hold'
 
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+    name = models.CharField(
+        max_length=100,
+        validators=[MinLengthValidator(2)],
+    )
+    description = models.TextField(max_length=500, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
     status = models.CharField(choices=StatusChoices.choices, max_length=10)
