@@ -15,7 +15,7 @@
                 See what needs attention and keep work flowing.
             </p>
         </div>
-        <a class="btn btn-primary" href="{% url 'task_create' %}">
+        <a class="btn btn-primary" href="{% url 'tasks:create' %}">
             + New Task
         </a>
     </div>
@@ -124,7 +124,7 @@
                     {% for task in tasks %}
                         <tr>
                             <td>
-                                <a class="fw-semibold text-decoration-none" href="{% url 'task_detail' task.pk %}">
+                                <a class="fw-semibold text-decoration-none" href="{% url 'tasks:detail' task.pk %}">
                                     {{ task.title }}
                                 </a>
                                 <div class="small text-muted">
@@ -156,7 +156,7 @@
                                 {% endfor %}
                             </td>
                             <td class="text-end">
-                                <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-outline-secondary">
+                                <a href="{% url 'tasks:update' task.pk %}" class="btn btn-sm btn-outline-secondary">
                                     Edit
                                 </a>
                             </td>

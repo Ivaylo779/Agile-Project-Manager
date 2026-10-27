@@ -22,7 +22,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="d-flex justify-content-end gap-2">
-                            <a class="btn btn-outline-secondary" href="{% url 'task_detail' task.pk %}">
+                            <a class="btn btn-outline-secondary" href="{% url 'tasks:detail' task.pk %}">
                                 Cancel
                             </a>
                             <button class="btn btn-danger" type="submit">

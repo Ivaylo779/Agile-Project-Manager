@@ -15,7 +15,7 @@
                 Turn project goals into focused, time-boxed work.
             </p>
         </div>
-        <a class="btn btn-primary" href="{% url 'sprint_create' %}">
+        <a class="btn btn-primary" href="{% url 'sprints:create' %}">
             + New Sprint
         </a>
     </div>
@@ -47,7 +47,7 @@
                     {% for sprint in sprints %}
                         <tr>
                             <td>
-                                <a class="fw-semibold text-decoration-none" href="{% url 'sprint_detail' sprint.pk %}">
+                                <a class="fw-semibold text-decoration-none" href="{% url 'sprints:detail' sprint.pk %}">
                                     {{ sprint.name }}
                                 </a>
                                 <div class="small text-muted">
@@ -55,7 +55,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="{% url 'project_detail' sprint.project.pk %}" class="text-decoration-none">
+                                <a href="{% url 'projects:detail' sprint.project.pk %}" class="text-decoration-none">
                                     {{ sprint.project.name }}
                                 </a>
                             </td>
@@ -78,7 +78,7 @@
                                 </div>
                             </td>
                             <td class="text-end">
-                                <a href="{% url 'sprint_update' sprint.pk %}" class="btn btn-sm btn-outline-secondary">
+                                <a href="{% url 'sprints:update' sprint.pk %}" class="btn btn-sm btn-outline-secondary">
                                     Edit
                                 </a>
                             </td>

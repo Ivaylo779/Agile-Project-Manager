@@ -105,13 +105,13 @@
                         <h2 class="h5 mb-0">
                             Recent tasks
                         </h2>
-                        <a href="{#  #}" class="small">
+                        <a href="{% url 'tasks:list' %}" class="small">
                             View all
                         </a>
                     </div>
                     {% for task in recent_tasks %}
                         <div class="py-3 border-bottom">
-                            <a class="fw-semibold text-decoration-none" href="{% url 'task_detail' task.pk %}">
+                            <a class="fw-semibold text-decoration-none" href="{% url 'tasks:detail' task.pk %}">
                                 {{ task.title }}
                             </a>
                             <div class="d-flex justify-content-between mt-1">
@@ -141,10 +141,10 @@
                 <a class="btn btn-outline-primary" href="{% url 'projects:create' %}">
                     Create project
                 </a>
-                <a class="btn btn-outline-primary" href="{#  #}">
+                <a class="btn btn-outline-primary" href="{% url 'sprints:create' %}">
                     Create sprint
                 </a>
-                <a class="btn btn-outline-primary" href="{#  #}">
+                <a class="btn btn-outline-primary" href="{% url 'tasks:create' %}">
                     Create task
                 </a>
                 <a class="btn btn-outline-secondary" href="{#  #}">
